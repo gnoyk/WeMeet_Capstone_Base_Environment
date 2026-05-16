@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.6">
+  <model name="scaled_passenger_car">
+    <static>false</static>
+    <link name="link">
+      <inertial>
+        <mass>1.2</mass>
+        <pose>0 0 0 0 0 0</pose>
+        <inertia>
+          <ixx>0.00976</ixx>
+          <iyy>0.03425</iyy>
+          <izz>0.03601</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <pose>0 0 0 0 0 1.57079633</pose>
+        <geometry>
+          <mesh>
+            <scale>0.003556 0.003556 0.003556</scale>
+            <uri>model://scaled_passenger_car/meshes/hatchback.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0 0 0 0 0 1.57079633</pose>
+        <geometry>
+          <mesh>
+            <scale>0.003556 0.003556 0.003556</scale>
+            <uri>model://scaled_passenger_car/meshes/hatchback.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
