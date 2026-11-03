@@ -1,54 +1,26 @@
-# YSM Validation Workspace
+# Remote Parking Simulation Environment
 
-ROS 2 and Gazebo workspace used to integrate and repeatedly test a multi-vehicle remote-parking scenario with LIMO-scale Ackermann vehicles.
+ROS 2와 Gazebo 기반 LIMO 원격 주차 시뮬레이션 환경입니다. 다중 차량 월드 구성, 차량 텔레옵, 주차 알고리즘 실행과 위치 초기화 기능을 제공합니다.
 
-> Development-stage simulation environment · ROS 2 Humble · Gazebo Classic
+## 주요 기능
 
-## Purpose
+- Gazebo 주차 월드와 LIMO 차량 모델 실행
+- 슬롯 추적기와 주차 제어 노드 통합 실행
+- LIMO2 키보드 텔레옵 및 주행 경계 제한
+- Gazebo 재시작 없이 차량 위치 초기화
 
-This repository preserves the development environment that preceded the team's final capstone system. It focuses on shared simulation setup, multi-vehicle spawning and reset, parking-node integration, and repeatable scenario execution.
+## 패키지
 
-The final team result is maintained separately in the SEA:ME@KOREA capstone repository. A cleaned publication copy will be linked here after upload.
-
-## Scenario flow
-
-```mermaid
-flowchart LR
-    W[Gazebo parking world] --> S[Spawn / reset LIMO vehicles]
-    S --> T[LIMO2 manual exit]
-    T --> D[Vacant-slot detection]
-    D --> P[LIMO1 parking sequence]
-    P --> R[Reset and retest]
-```
-
-## Workspace structure
-
-| Package | Role |
+| 패키지 | 기능 |
 | --- | --- |
-| `limo_car` | LIMO meshes, URDF/Xacro, Ackermann model, and RViz settings |
-| `limo_gazebosim` | Parking worlds, vehicle models, spawn/reset tools, and simulation launch support |
-| `my_valet_parking` | Slot tracking, teleoperation, exit/evasion, and parking experiment nodes |
-| `parking_pkg` | Integrated preparation and parking state-machine nodes |
+| `limo_car` | LIMO 모델, Ackermann 설정, RViz 구성 |
+| `limo_gazebosim` | 시뮬레이션 월드, 차량 스폰·초기화, 실행 지원 |
+| `my_valet_parking` | 슬롯 추적, 텔레옵, 출차 및 주차 제어 |
+| `parking_pkg` | 주차 시나리오 상태 관리 및 통합 실행 |
 
-## Preserved execution tools
+## 실행
 
-| File | Confirmed behavior from source |
-| --- | --- |
-| `start_YSM.sh` | Builds the workspace when needed, starts Gazebo and robot state publishing, then spawns the LIMO vehicles |
-| `src/my_valet_parking/scripts/run_parking_algorithm.sh` | Starts the slot tracker and valet-parking controller and stops both on exit |
-| `src/my_valet_parking/my_valet_parking/limo2_arrow_teleop.py` | Publishes ramp-limited keyboard commands for LIMO2 and blocks motion beyond configured soft boundaries |
-| `src/limo_gazebosim/scripts/reset_limo_positions.sh` | Stops scenario nodes and calls `reset_limo.py` to respawn the vehicles without restarting Gazebo |
-
-These files are retained because they appear together in the repository's recorded working-scenario commit. This does not establish sole authorship of every underlying package or algorithm.
-
-## Build and start
-
-Original environment:
-
-- Ubuntu 22.04
-- ROS 2 Humble
-- Gazebo Classic
-- Python 3 / `rclpy`
+실행 환경: Ubuntu 22.04, ROS 2 Humble, Gazebo Classic
 
 ```bash
 source /opt/ros/humble/setup.bash
@@ -58,26 +30,18 @@ source install/setup.bash
 ./start_YSM.sh
 ```
 
-After the simulation is ready, the integrated parking package can be launched with:
+시뮬레이션이 준비되면 주차 시나리오를 실행합니다.
 
 ```bash
 ros2 launch parking_pkg valet.launch.py
 ```
 
-The alternative development launcher can be run with:
+주요 실행 도구:
 
-```bash
-./src/my_valet_parking/scripts/run_parking_algorithm.sh
-```
+- `src/my_valet_parking/scripts/run_parking_algorithm.sh`: 슬롯 추적 및 주차 제어 실행
+- `src/my_valet_parking/my_valet_parking/limo2_arrow_teleop.py`: LIMO2 키보드 제어
+- `src/limo_gazebosim/scripts/reset_limo_positions.sh`: Gazebo를 유지한 채 차량 위치 초기화
 
-## Test record and limits
+## 출처
 
-Git history records a working full-scenario checkpoint and a later Gazebo physics-iteration adjustment. The repository also preserves reset/retest tooling and parameterized slot detection.
-
-The current machine runs Ubuntu 24.04 with ROS 2 Jazzy, not the original Humble environment. No new end-to-end execution result is claimed during this publication cleanup. A local, uncommitted slot-coordinate adjustment is retained as a working-copy change but has not been independently revalidated here.
-
-## Source and attribution
-
-This project was developed from existing ROS 2 and LIMO/Gazebo resources and then adapted for the team parking scenario. Package metadata and team history are preserved. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
-The presence of a file does not imply that the repository owner wrote the complete upstream implementation. Personal contribution claims should be limited to changes supported by project records.
+외부 패키지와 라이선스 정보는 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)에 정리되어 있습니다.
