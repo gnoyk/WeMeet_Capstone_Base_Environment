@@ -24,7 +24,7 @@ ROS 2와 Gazebo 기반 LIMO 원격 주차 시뮬레이션 환경입니다. 다�
 
 ```bash
 source /opt/ros/humble/setup.bash
-cd ~/YSM_ws
+cd ~/WeMeet_Capstone_Base_Environment
 colcon build --symlink-install
 source install/setup.bash
 ./start_YSM.sh
