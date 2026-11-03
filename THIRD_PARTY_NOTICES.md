@@ -1,4 +1,4 @@
-# Third-party and team-source notices
+# Third-party notices
 
 This workspace contains adapted ROS 2 and Gazebo packages alongside project-specific parking code.
 
@@ -12,10 +12,3 @@ This workspace contains adapted ROS 2 and Gazebo packages alongside project-spec
 
 Related official LIMO ROS 2 resources are maintained by AgileX Robotics at https://github.com/agilexrobotics/limo_ros2. The exact origin of every archived file could not be reconstructed from the available Git history, so upstream notices and package metadata must be retained.
 
-## Team result
-
-Final capstone source:
-
-https://github.com/SEA-ME-KOREA/capstoneproject_2026F1
-
-This repository represents an earlier development and simulation-validation workspace. Identical files also appear in the final team repository; their presence here does not establish sole individual authorship.
