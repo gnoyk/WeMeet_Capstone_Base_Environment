@@ -24,7 +24,7 @@ For repeated tests, vehicle positions can be reset without restarting Gazebo. Te
 | `my_valet_parking` | Slot tracking, teleoperation, pull-out control, and parking control |
 | `parking_pkg` | Parking scenario state management and integrated launch support |
 
-## Running the Environment
+## Running the Parking Scenario
 
 Requirements: Ubuntu 22.04, ROS 2 Humble, and Gazebo Classic.
 
