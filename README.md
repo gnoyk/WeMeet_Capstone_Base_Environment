@@ -28,17 +28,6 @@ For repeated tests, vehicle positions can be reset without restarting Gazebo. Te
 
 Requirements: Ubuntu 22.04, ROS 2 Humble, and Gazebo Classic.
 
-The `start_YSM.sh` script uses `~/YSM_ws` as the workspace path. Clone the repository to that location, then build and start the environment:
-
-```bash
-git clone https://github.com/gnoyk/WeMeet_Capstone_Base_Environment.git ~/YSM_ws
-source /opt/ros/humble/setup.bash
-cd ~/YSM_ws
-colcon build --symlink-install
-source install/setup.bash
-./start_YSM.sh
-```
-
 When the simulation is ready, launch the parking scenario:
 
 ```bash
