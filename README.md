@@ -1,47 +1,56 @@
 # Remote Parking Simulation Environment
 
-ROS 2와 Gazebo 기반 LIMO 원격 주차 시뮬레이션 환경입니다. 다중 차량 월드 구성, 차량 텔레옵, 주차 알고리즘 실행과 위치 초기화 기능을 제공합니다.
+This repository provides a ROS 2 and Gazebo simulation environment for LIMO-based remote parking. It includes a multi-vehicle parking world, vehicle teleoperation, parking algorithm execution, and vehicle position reset support.
 
-## 주요 기능
+## Development and Validation Purpose
 
-- Gazebo 주차 월드와 LIMO 차량 모델 실행
-- 슬롯 추적기와 주차 제어 노드 통합 실행
-- LIMO2 키보드 텔레옵 및 주행 경계 제한
-- Gazebo 재시작 없이 차량 위치 초기화
+This common Gazebo base environment was created to support team members in feature development and preliminary validation. The initial environment consists of 30 static vehicles and four LIMO vehicles, allowing perception, path-planning, and control functions to be developed and validated under consistent conditions.
 
-## 패키지
+For repeated tests, vehicle positions can be reset without restarting Gazebo. Team members can also adapt the number of vehicles and the scenarios to suit the goals of each algorithm. This repository is intended as a simulation-based development and validation environment.
 
-| 패키지 | 기능 |
+## Features
+
+- Launches the Gazebo parking world and LIMO vehicle models
+- Runs the slot tracker and parking control nodes together
+- Provides keyboard teleoperation and driving boundary limits for LIMO2
+- Resets vehicle positions without restarting Gazebo
+
+## Packages
+
+| Package | Purpose |
 | --- | --- |
-| `limo_car` | LIMO 모델, Ackermann 설정, RViz 구성 |
-| `limo_gazebosim` | 시뮬레이션 월드, 차량 스폰·초기화, 실행 지원 |
-| `my_valet_parking` | 슬롯 추적, 텔레옵, 출차 및 주차 제어 |
-| `parking_pkg` | 주차 시나리오 상태 관리 및 통합 실행 |
+| `limo_car` | LIMO models, Ackermann configuration, and RViz configuration |
+| `limo_gazebosim` | Simulation worlds, vehicle spawning and reset tools, and launch support |
+| `my_valet_parking` | Slot tracking, teleoperation, pull-out control, and parking control |
+| `parking_pkg` | Parking scenario state management and integrated launch support |
 
-## 실행
+## Running the Environment
 
-실행 환경: Ubuntu 22.04, ROS 2 Humble, Gazebo Classic
+Requirements: Ubuntu 22.04, ROS 2 Humble, and Gazebo Classic.
+
+The `start_YSM.sh` script uses `~/YSM_ws` as the workspace path. Clone the repository to that location, then build and start the environment:
 
 ```bash
+git clone https://github.com/gnoyk/WeMeet_Capstone_Base_Environment.git ~/YSM_ws
 source /opt/ros/humble/setup.bash
-cd ~/WeMeet_Capstone_Base_Environment
+cd ~/YSM_ws
 colcon build --symlink-install
 source install/setup.bash
 ./start_YSM.sh
 ```
 
-시뮬레이션이 준비되면 주차 시나리오를 실행합니다.
+When the simulation is ready, launch the parking scenario:
 
 ```bash
 ros2 launch parking_pkg valet.launch.py
 ```
 
-주요 실행 도구:
+Key tools:
 
-- `src/my_valet_parking/scripts/run_parking_algorithm.sh`: 슬롯 추적 및 주차 제어 실행
-- `src/my_valet_parking/my_valet_parking/limo2_arrow_teleop.py`: LIMO2 키보드 제어
-- `src/limo_gazebosim/scripts/reset_limo_positions.sh`: Gazebo를 유지한 채 차량 위치 초기화
+- `src/my_valet_parking/scripts/run_parking_algorithm.sh`: runs slot tracking and parking control
+- `src/my_valet_parking/my_valet_parking/limo2_arrow_teleop.py`: provides keyboard control for LIMO2
+- `src/limo_gazebosim/scripts/reset_limo_positions.sh`: resets vehicle positions while keeping Gazebo running
 
-## 출처
+## Sources
 
-외부 패키지와 라이선스 정보는 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)에 정리되어 있습니다.
+Third-party packages and license information are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
